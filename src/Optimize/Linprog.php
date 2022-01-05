@@ -3,6 +3,7 @@
 namespace Tetration\Science\Optimize;
 
 use \ArrayObject;
+use Tetration\Science\Optimize\Exception\EmptyInequalityMatrix;
 
 /**
  * Linear programming: minimize/maximize a linear objective function subject to
@@ -27,16 +28,49 @@ class Linprog
         $this->c = $c;
         $this->A_ub = $A_ub;
         $this->b_ub = $b_ub;
-        $this->A_eq = $A_eq;
-        $this->b_eq = $b_eq;
-        $this->bounds = $bounds;
+        #$this->A_eq = $A_eq;
+        #$this->b_eq = $b_eq;
+        #$this->bounds = $bounds;
     }
 
     public function minimize(){}
 
-    public function maximize(){}
+    public function maximize()
+    {
+        $this->IdentifyCornerPoints();
+    }
 
-    private function IdentifyCornerPoints() { /* Todo : Identify the coordinates of all corner points of the feasible region */ }
+    /**
+     * @throws EmptyInequalityMatrix
+     */
+    private function IdentifyCornerPoints()
+    {
+        /* Todo : Identify the coordinates of all corner points of the feasible region */
+        $dimensions = 0;
+        $count = $this->A_ub->count();
+
+        if($count == 0) throw new EmptyInequalityMatrix();
+
+        $dimensions = count($this->A_ub[0]);
+        if ($dimensions == 0) throw new EmptyInequalityMatrix();
+
+        for($i=0;$i<$count;$i++)
+        {
+            $inequality = $this->A_ub[$i];
+            for($j=$i+1;$j<$count;$j++)
+            {
+                $inequalityNext = $this->A_ub[$j];
+                foreach($inequality as $k => $factor)
+                {
+                    echo $factor . ' + ' . $inequalityNext[$k] . ' = ' . $this->b_ub[$i] + $this->b_ub[$j]. PHP_EOL;
+                }
+                echo '------' . PHP_EOL;
+            }
+            echo '=========================' . PHP_EOL;
+        }
+
+        //var_dump($dimensions);
+    }
     private function IdentifyTheObjectiveFunction() { /* Todo : Find the objective function */ }
     private function Evaluate() {
         /* Todo : Evaluate the objective function at all of these corner points
