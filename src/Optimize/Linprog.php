@@ -15,16 +15,20 @@ use \ArrayObject;
  */
 class Linprog
 {
-    protected ArrayObject $c;
-    protected ArrayObject $A_ub;
-    protected ArrayObject $b_ub;
-    protected array $bounds;
+    protected ArrayObject $c; // min cT x
+    protected ArrayObject $A_ub; // inequalities matrix
+    protected ArrayObject $b_ub; // inequalities vector
+    protected ArrayObject $A_eq; // equalities matrix
+    protected ArrayObject $b_eq; // equalities vector
+    protected ArrayObject $bounds; // bounds I <= x <= u
 
-    public function __construct($c, $A_ub, $b_ub, $bounds=array(0, null))
+    public function __construct($c, $A_ub, $b_ub, $A_eq=null, $b_eq=null, $bounds=null)
     {
         $this->c = $c;
         $this->A_ub = $A_ub;
         $this->b_ub = $b_ub;
+        $this->A_eq = $A_eq;
+        $this->b_eq = $b_eq;
         $this->bounds = $bounds;
     }
 
