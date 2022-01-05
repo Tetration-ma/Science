@@ -1,0 +1,21 @@
+{
+    "name": "tetration/science",
+    "description": "Just science! A SciPy like library for PHP",
+    "type": "library",
+    "require": {
+        "php": "8.1"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Tetration\\Science\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Achraf Soltani",
+            "email": "achraf.soltani@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
