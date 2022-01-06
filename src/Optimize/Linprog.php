@@ -23,7 +23,7 @@ class Linprog
     protected ArrayObject $b_eq; // equalities vector
     protected ArrayObject $bounds; // bounds I <= x <= u
 
-    public function __construct($c, $A_ub, $b_ub, $A_eq=null, $b_eq=null, $bounds=null)
+    public function __construct($c, $A_ub, $b_ub, $A_eq=null, $b_eq=null, $bounds=null, $method='simplex')
     {
         $this->c = $c;
         $this->A_ub = $A_ub;
